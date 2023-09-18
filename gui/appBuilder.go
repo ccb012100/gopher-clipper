@@ -1,4 +1,4 @@
-package main
+package gui
 
 import (
 	"log"
@@ -11,7 +11,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func main() {
+func buildApp() {
 	appTitle := "GopherClip"
 
 	app := app.New()
@@ -26,7 +26,7 @@ func main() {
 	}
 
 	// Commented out because SystemTrayIcon is currently broken in fyne
-	// configureSystemTray(app, window, appTitle, appIcon)
+	// buildSystemTray(app, window, appTitle, appIcon)
 
 	hello := widget.NewLabel(appTitle)
 
@@ -44,7 +44,7 @@ func main() {
 }
 
 //lint:ignore U1000 Ignore unused function temporarily until https://github.com/fyne-io/fyne/issues/3968 is fixed
-func configureSystemTray(app fyne.App, window fyne.Window, appTitle string, appIcon fyne.Resource) {
+func buildSystemTray(app fyne.App, window fyne.Window, appTitle string, appIcon fyne.Resource) {
 	if desktopApp, ok := app.(desktop.App); ok {
 		sysTrayMenu := fyne.NewMenu(appTitle,
 			fyne.NewMenuItem("Show", func() {
