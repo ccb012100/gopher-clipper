@@ -26,6 +26,7 @@ Clipboard utility written in Go
   - [ ] `Ctrl-Shift-C`
 - [ ] Export stack to file
   - either to `$HOME/Downloads/gopher-clip-stack-YYYY-MM-DD-HHMMSS.txt` or use a file save GUI
+- [ ] Switch logging to [logrus](https://github.com/sirupsen/logrus)
 
 #### Maybe
 
