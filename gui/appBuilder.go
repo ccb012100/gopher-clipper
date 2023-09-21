@@ -9,6 +9,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"golang.design/x/clipboard"
 )
 
 var content *fyne.Container
@@ -34,23 +35,35 @@ func BuildWindow(app fyne.App, windowTitle string) fyne.Window {
 }
 
 func InitializeStack(window *fyne.Window) {
-	content = container.New(layout.NewVBoxLayout(), CreateButton("Click to beep"))
+	content = container.New(layout.NewVBoxLayout(), CreateCopyButton())
 
 	(*window).SetContent(container.New(layout.NewCenterLayout(), content))
 }
 
-func CreateButton(name string) *widget.Button {
-	return widget.NewButton(name, func() {
-		AddStackItem("beep")
+func CreateCopyButton() *widget.Button {
+	return widget.NewButtonWithIcon("Add from Clipboard", theme.ContentPasteIcon(), func() {
+		AddStackItem()
 	})
 }
 
-func AddStackItem(item string) {
-	btn := widget.NewButton(item, func() {
-		AddStackItem("boop")
+func AddStackItem() {
+	clip := GetClipboardText()
+	btn := widget.NewButton(string(clip), func() {
+		clip := clip
+		CopyToClipboard(clip)
 	})
-
+	// TODO: add to top of list, not bottom
 	content.Add(btn)
+}
+
+func CopyToClipboard(clip []byte) {
+	clipboard.Write(clipboard.FmtText, clip)
+}
+
+func GetClipboardText() []byte {
+	// TODO: is there a way to ignore images in clipboard?
+	// TODO: ignore duplicates
+	return clipboard.Read(clipboard.FmtText)
 }
 
 // ignore temporarily until https://github.com/fyne-io/fyne/issues/3968 is fixed
