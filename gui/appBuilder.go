@@ -4,18 +4,17 @@ import (
 	"log"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/driver/desktop"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
-func buildApp() {
-	appTitle := "GopherClip"
+var content *fyne.Container
 
-	app := app.New()
-	window := app.NewWindow(appTitle)
+func BuildWindow(app fyne.App, windowTitle string) fyne.Window {
+	window := app.NewWindow(windowTitle)
 
 	// use window.SetIcon to set window & taskbar icon; app.SetIcon() doesn't work
 	appIcon, err := fyne.LoadResourceFromPath("Icon.png")
@@ -28,22 +27,35 @@ func buildApp() {
 	// Commented out because SystemTrayIcon is currently broken in fyne
 	// buildSystemTray(app, window, appTitle, appIcon)
 
-	hello := widget.NewLabel(appTitle)
-
-	window.SetContent(container.NewVBox(
-		hello,
-		widget.NewButton("Press me!", func() {
-			hello.SetText("Clicked!")
-		}),
-	))
-
 	window.SetIcon(appIcon)
 	window.SetIcon(theme.ContentPasteIcon())
 
-	window.ShowAndRun()
+	return window
 }
 
-//lint:ignore U1000 Ignore unused function temporarily until https://github.com/fyne-io/fyne/issues/3968 is fixed
+func InitializeStack(window *fyne.Window) {
+	content = container.New(layout.NewVBoxLayout(), CreateButton("Click to beep"))
+
+	(*window).SetContent(container.New(layout.NewCenterLayout(), content))
+}
+
+func CreateButton(name string) *widget.Button {
+	return widget.NewButton(name, func() {
+		AddStackItem("beep")
+	})
+}
+
+func AddStackItem(item string) {
+	btn := widget.NewButton(item, func() {
+		AddStackItem("boop")
+	})
+
+	content.Add(btn)
+}
+
+// ignore temporarily until https://github.com/fyne-io/fyne/issues/3968 is fixed
+//
+//lint:ignore U1000 Ignore unused function
 func buildSystemTray(app fyne.App, window fyne.Window, appTitle string, appIcon fyne.Resource) {
 	if desktopApp, ok := app.(desktop.App); ok {
 		sysTrayMenu := fyne.NewMenu(appTitle,
