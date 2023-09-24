@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"fyne.io/fyne/v2/app"
-	"github.com/ccb012100/gopher-clip/gui"
+	"github.com/ccb012100/gopher-clipper/gui"
 	"golang.design/x/clipboard"
 )
 
@@ -15,7 +15,7 @@ func main() {
 		panic(err)
 	}
 
-	windowTitle := "GopherClip"
+	windowTitle := "GopherClipper"
 
 	app := app.New()
 

@@ -1,4 +1,4 @@
-# GopherClip
+# GopherClipper
 
 Clipboard utility written in Go
 
@@ -25,7 +25,7 @@ Clipboard utility written in Go
   - [ ] GUI button
   - [ ] `Ctrl-Shift-C`
 - [ ] Export stack to file
-  - either to `$HOME/Downloads/gopher-clip-stack-YYYY-MM-DD-HHMMSS.txt` or use a file save GUI
+  - either to `$HOME/Downloads/gopher-clipper-stack-YYYY-MM-DD-HHMMSS.txt` or use a file save GUI
 - [ ] Switch logging to [logrus](https://github.com/sirupsen/logrus)
 
 #### Maybe
@@ -55,4 +55,5 @@ Clipboard utility written in Go
 
 ## Attributions
 
-![clipboard icon](Icon.png) Clipboard icon created by [Mehwish - Flaticon](https://www.flaticon.com/free-icons/clipboard).
+![clipboard icon](Icon.png) Clipboard icon created by [Mehwish -
+Flaticon](https://www.flaticon.com/free-icons/clipboard).

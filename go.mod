@@ -1,4 +1,4 @@
-module github.com/ccb012100/gopher-clip
+module github.com/ccb012100/gopher-clipper
 
 go 1.21.1
 
